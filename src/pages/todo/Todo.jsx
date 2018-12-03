@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import './Todo.css';
-import { ADD_TODO, SUB_TODO } from './todoActions';
+import { ADD_TODO, DEL_TODO } from './todoActions';
 
 export const TodoComponent = (props) => {
   let input;
@@ -21,7 +21,7 @@ export const TodoComponent = (props) => {
         return (
           <div key={item.counter}>{
             <p onClick={() => {
-              props.dispatch({ type: SUB_TODO, payload: { value: item.counter } })
+              props.dispatch({ type: DEL_TODO, payload: { value: item.counter } })
             }}>
               {item.counter} : {item.todoText}
               <button style={{ marginLeft: 20 }}> delete </button>
