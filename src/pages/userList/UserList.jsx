@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux'
-
 import './UserList.css';
 import { FETCH_USERS } from './userListActions';
+import { Avtar } from '../../common/components';
 
 export const UserListComponent = (props) => {
   console.log("pp:", props)
@@ -13,17 +13,29 @@ export const UserListComponent = (props) => {
       <br />
 
       <button onClick={() => {
-        props.dispatch({ type: FETCH_USERS }) //? dispatch fetching action
+        props.dispatch({ type: FETCH_USERS }) //* dispatch fetching action
       }}>Get UserList</button>
       <br />
+
+      {props.userList && props.userList.map((item,key) => {
+        return (
+          <div key={key}>
+            <p>{item.id&&item.id}---{item.first_name&&item.first_name}---{item.last_name && item.last_name}</p> 
+            <Avtar img={item.avatar}/>
+          </div>
+        )
+      })
+      }
 
     </div>
   )
 }
 
 const mapStateToprops = (state) => {
+  console.log("mapStateToprops",state);
+  
   return {
-    UserList: state.UserReducer
+    userList: state.userListReducer.users
   }
 }
 

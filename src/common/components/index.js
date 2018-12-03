@@ -1,0 +1,1 @@
+export { Avtar } from './Avtar/Avtar'

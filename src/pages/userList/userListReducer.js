@@ -2,7 +2,7 @@ import { FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from "./us
 
 const initialState = {
   fetching: false,
-  user: null,
+  users: null,
   error: null,
   success: false
 };
@@ -16,7 +16,7 @@ export function userListReducer(state = initialState, action) {
 
     case FETCH_USER_SUCCESS:
       console.log(" FETCH_USER_SUCCESS", action.payload)
-      return { ...state, fetching: false, error: false, success: true, user: action.payload };
+      return { ...state, fetching: false, error: false, success: true, users: action.payload };
 
     case FETCH_USER_FAILED:
       console.log(" FETCH_USER_FAILED")

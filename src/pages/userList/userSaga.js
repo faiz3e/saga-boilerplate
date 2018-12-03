@@ -11,7 +11,7 @@ function* workerSaga() {
   try {
     yield put({ type: FETCH_USER_INITIATE });
     const response = yield call(getData);
-    yield put({ type: FETCH_USER_SUCCESS, payload: response });
+    yield put({ type: FETCH_USER_SUCCESS, payload: response.data });
     // console.log(response);
   }
   catch (error) {
@@ -22,7 +22,7 @@ function* workerSaga() {
 
 const getData = () => {
   return new Promise((resolve, reject) => {
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('https://reqres.in/api/users?page=2')
       .then((response) => {
         if (response.status !== 200) {
           reject('error');

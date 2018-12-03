@@ -14,6 +14,7 @@ const logger = (store) => {
     return next => {
         return action => {
             const result = next(action);
+            // console.log(store);
             return result;
         }
     }
