@@ -11,8 +11,8 @@ function* workerSaga() {
   try {
     yield put({ type: FETCH_USER_INITIATE });
     const response = yield call(getData);
-    yield put({ type: FETCH_USER_SUCCESS, response });
-    console.log(response);
+    yield put({ type: FETCH_USER_SUCCESS, payload: response });
+    // console.log(response);
   }
   catch (error) {
     console.log(error);
