@@ -1,32 +1,31 @@
-import { FETCH_USERS } from "./userListActions";
-
-const API_CALL_REQUEST = "API_CALL_REQUEST";
-const API_CALL_SUCCESS = "API_CALL_SUCCESS";
-const API_CALL_FAILURE = "API_CALL_FAILURE";
-
-
+import { FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from "./userListActions";
 
 const initialState = {
-    fetching: false,
-    dog: null,
-    error: null
-  };
+  fetching: false,
+  dog: null,
+  error: null,
+  success:false
+};
 
-  export function userListReducer(state = initialState, action) {
-    switch (action.type) {
-      case API_CALL_REQUEST:
-      console.log("switch API_CALL_REQUEST",action.type)      
-        return { ...state, fetching: true, error: null };
-      case API_CALL_SUCCESS:
-      console.log("switch API_CALL_SUCCESS",action.type)      
-        return { ...state, fetching: false, dog: action.dog };
-      case API_CALL_FAILURE:
-      console.log("switch API_CALL_FAILURE",action.type)      
-        return { ...state, fetching: false, dog: null, error: action.error };
-      default:
-        return state;
-    }
+export function userListReducer(state = initialState, action) {
+  switch (action.type) {
+   
+    case FETCH_USER_INITIATE:
+      console.log(" FETCH_USER_INITIATE")
+      return { ...state,fetching: true, error: false, success:false };
+
+    case FETCH_USER_SUCCESS:
+      console.log(" FETCH_USER_SUCCESS")
+      return { ...state,fetching: false, error: false, success:true };
+
+    case FETCH_USER_FAILED:
+      console.log(" FETCH_USER_FAILED")
+      return { ...state, fetching: false, error: true, success:false};
+
+    default:
+      return state;
   }
+}
 
 
 // export const userListReducer = (state = initialState, action) => {

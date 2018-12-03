@@ -8,15 +8,12 @@ import * as serviceWorker from './serviceWorker';
 import { rootReducer } from './common/store/rootReducer'
 import { App } from './App';
 import './index.css';
-// import { fetchUsersWorkerSaga } from './userList/userSaga';
 import { fetchUsersWatcherSaga } from './pages/userList/userSaga'
 
 const logger = (store) => {
     return next => {
         return action => {
-            // console.log('[middleware] this action is called before reducer pickes up action ', action)
             const result = next(action);
-            // console.log('[middleware] store state', store.getState())
             return result;
         }
     }
@@ -26,9 +23,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)))
-
-// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware,logger)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware,logger)))
 
 sagaMiddleware.run(fetchUsersWatcherSaga);
 

@@ -1,71 +1,40 @@
-import { FETCH_USERS} from './userListActions'
-import {ADD_COUNTER} from '../counter/counterActions'
-
 import { takeLatest, call, put } from "redux-saga/effects";
-import axios from "axios"
+
+import { FETCH_USERS, FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from './userListActions'
 
 
 export function* fetchUsersWatcherSaga() {
-    yield takeLatest("API_CALL_REQUEST", workerSaga);
-    console.log("in fetchUsersWatcherSaga ");
-    
+  yield takeLatest(FETCH_USERS, workerSaga);
+}
+
+function* workerSaga() {
+  try {
+    yield put({ type: FETCH_USER_INITIATE });
+    const response = yield call(getData);
+    yield put({ type: FETCH_USER_SUCCESS, response });
+    console.log(response);
   }
-
-  function fetchDog() {
-    return axios({
-      method: "get",
-      url: "https://dog.ceo/api/breeds/image/random"
-    });
+  catch (error) {
+    console.log(error);
+    yield put({ type: FETCH_USER_FAILED, error });
   }
-  
+}
 
-  function* workerSaga() {
-    try {
-        console.log("in worker saga");
-        
-      const response = yield call(fetchDog);
-      const dog = response.data.message;
-  
-      // dispatch a success action to the store with the new dog
-      yield put({ type: "API_CALL_SUCCESS", dog });
-    
-    } catch (error) {
-      // dispatch a failure action to the store with the error
-      yield put({ type: "API_CALL_FAILURE", error });
-    }
-  }
-
-
-
-
-// export function* fetchUsersWorkerSaga(action){
-//    yield console.log("in fetch user saga ",action);
-//    yield put({ type:ADD_COUNTER, payload:1 }) 
-// }
+const getData = () => {
+  return new Promise((resolve, reject) => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then((response) => {
+        if (response.status !== 200) {
+          reject('error');
+        }
+        return response.json()
+      })
+      .then((data) => {
+        resolve(data);
+      }).catch((error) => {
+        reject(JSON.stringify(error));
+      })
+  });
+}
 
 
-// const getData = () => {
-//     return new Promise((resolve, reject) => {
-//       fetch('https://jsonplaceholder.typicode.com/todos')
-//         .then((response) => {
-//           if (response.status !== 200) {
-//             reject('error');
-//           }
-//           return response.json()
-//         })
-//         .then((data) => {
-//           console.log("data",data);
-//           resolve(data);
-//         }).catch((error) => {
-//           reject(JSON.stringify(error));
-//         })
-//     });
-//   }
-  
-
-
-
-// export function* checkAuthTimeoutSaga(action) {
-//     yield delay(action.expirationTime * 1000);
-//     yield put(actions.logout());
-//   }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import './UserList.css';
 import { FETCH_USERS } from './userListActions';
-// import { ADD_UserList, SUB_UserList } from './UserListActions';
 
 export const UserListComponent = (props) => {
   console.log("pp:", props)
@@ -14,16 +13,9 @@ export const UserListComponent = (props) => {
       <br />
 
       <button onClick={() => {
-        props.dispatch({ type: 'API_CALL_REQUEST' })
-      //  getData()
-      console.log("dispatch API_CALL_REQUEST"  );
-      
-
+        props.dispatch({ type: FETCH_USERS }) //? dispatch fetching action
       }}>Get UserList</button>
       <br />
-
-
-
 
     </div>
   )
