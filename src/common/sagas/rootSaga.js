@@ -1,11 +1,11 @@
-import { takeEvery ,takeLatest} from "redux-saga";
-import { fetchUsersWorkerSaga } from '../../pages/userList/userSaga';
-import {ADD_COUNTER} from '../../pages/counter/counterActions';
+import { takeLatest } from "redux-saga";
+import { all } from 'redux-saga/effects';
 
-export function* watchfetchUserSaga(){
-    // console.log("watchfetchUserSaga");
-    
-yield takeLatest (ADD_COUNTER, fetchUsersWorkerSaga)
+import { fetchUsersWatcherSaga } from '../../pages/userList/userSaga';
+
+export function* rootSaga(){
+    // fetchUsersWatcherSaga    
+yield  all(fetchUsersWatcherSaga)
 }
 
 

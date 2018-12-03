@@ -6,7 +6,6 @@ import { FETCH_USERS } from './userListActions';
 import { Avtar } from '../../common/components';
 
 export const UserListComponent = (props) => {
-  console.log("pp:", props)
   return (
     <div className='Middle'>
       <p>UserList</p>

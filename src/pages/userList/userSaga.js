@@ -2,7 +2,6 @@ import { takeLatest, call, put } from "redux-saga/effects";
 
 import { FETCH_USERS, FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from './userListActions'
 
-
 export function* fetchUsersWatcherSaga() {
   yield takeLatest(FETCH_USERS, workerSaga);
 }

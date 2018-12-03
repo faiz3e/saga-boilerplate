@@ -5,7 +5,6 @@ import './Counter.css';
 import { ADD_COUNTER, SUB_COUNTER } from './counterActions';
 
 export const CounterComponent = (props) => {
-    console.log("pp:", props)
     return (
         <div className='Left'>
             <p> Counter </p>
