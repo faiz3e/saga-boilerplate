@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
-import  createSagaMiddleware  from 'redux-saga'
+import createSagaMiddleware from 'redux-saga'
 
 import * as serviceWorker from './serviceWorker';
-import { rootReducer } from './store/rootReducer'
+import { rootReducer } from './common/store/rootReducer'
 import { App } from './App';
 import './index.css';
 // import { fetchUsersWorkerSaga } from './userList/userSaga';
-import {watchfetchUserSaga} from './sagas/rootSaga'
+import { fetchUsersWatcherSaga } from './pages/userList/userSaga'
 
 const logger = (store) => {
     return next => {
@@ -26,9 +26,11 @@ const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger,sagaMiddleware)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)))
 
-// sagaMiddleware.run(watchfetchUserSaga);
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware,logger)))
+
+sagaMiddleware.run(fetchUsersWatcherSaga);
 
 ReactDOM.render(
     <Provider store={store}>

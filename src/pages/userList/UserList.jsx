@@ -14,8 +14,10 @@ export const UserListComponent = (props) => {
       <br />
 
       <button onClick={() => {
-        // props.dispatch({ type: FETCH_USERS })
+        props.dispatch({ type: 'API_CALL_REQUEST' })
       //  getData()
+      console.log("dispatch API_CALL_REQUEST"  );
+      
 
       }}>Get UserList</button>
       <br />
