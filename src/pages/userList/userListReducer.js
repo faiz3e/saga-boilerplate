@@ -1,4 +1,4 @@
-import { FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED } from "./userListActions";
+import { FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED, FETCH_USERS } from "./userListActions";
 
 const initialState = {
   fetching: false,
@@ -8,8 +8,12 @@ const initialState = {
 };
 
 export function userListReducer(state = initialState, action) {
+  console.log("action in reducer ",action);
+  
   switch (action.type) {
-
+    case FETCH_USERS: 
+    console.log("of reducer")    
+    return{...state};
     case FETCH_USER_INITIATE:
       console.log(" FETCH_USER_INITIATE")
       return { ...state, fetching: true, error: false, success: false };
