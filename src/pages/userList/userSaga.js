@@ -4,10 +4,13 @@ import { FETCH_USERS, FETCH_USER_INITIATE, FETCH_USER_SUCCESS, FETCH_USER_FAILED
 
 export function* fetchUsersWatcherSaga() {
   yield takeLatest(FETCH_USERS, workerSaga);
+  console.log("watcher saga call");
+  
 }
 
 function* workerSaga() {
   try {
+    console.log("worker saga call");
     yield put({ type: FETCH_USER_INITIATE });
     const response = yield call(getData);
     yield put({ type: FETCH_USER_SUCCESS, payload: response.data });
